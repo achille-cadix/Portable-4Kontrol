@@ -6,7 +6,9 @@ import Navigation from './Navigation/Navigation';
 import SplashScreen from 'react-native-splash-screen';
 
 export default function App() {
-
+  useEffect(() => {
+    SplashScreen.hide();
+  }, [])
   return (
     <Provider store={Store} style={styles.container}>
       <Navigation />

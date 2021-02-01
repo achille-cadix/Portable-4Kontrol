@@ -36,7 +36,7 @@ class PlaylistContainer extends React.Component {
     getMyStringValue = async (item) => {
         try {
             stringValue = await AsyncStorage.getItem(item)
-            return stringValue != null ? stringValue : this.default_ip[item]
+            return stringValue != null ? stringValue : this.default_ip
         } catch (e) {
             console.log(e)
         }

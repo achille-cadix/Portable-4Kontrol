@@ -39,7 +39,7 @@ class ProgramContainer extends React.Component {
     getMyStringValue = async (item) => {
         try {
             stringValue = await AsyncStorage.getItem(item)
-            return stringValue != null ? stringValue : this.props.navigation.state.params.defaultValues[item]
+            return stringValue != null ? stringValue : this.default_ip
         } catch (e) {
             console.log(e)
         }
@@ -122,7 +122,7 @@ class ProgramContainer extends React.Component {
                 autoHide: true,
                 position: 'bottom',
                 text1: 'Erreur : pas de réponse du serveur',
-                text2: 'Veuillez vérifier que vous êtes bien connecté au Wifi du 4K'
+                text2: error.message
             });
             this.setState({
                 refreshingData: false
@@ -152,13 +152,11 @@ class ProgramContainer extends React.Component {
                 autoHide: true,
                 position: 'bottom',
                 text1: 'Erreur : pas de réponse du serveur',
-                text2: 'Veuillez vérifier que vous êtes bien connecté au Wifi du 4K'
+                text2: error.message
             });
             this.setState({
                 refreshingData: false
             })
-            const actionStop = { type: "STOP_PROGRAM", value: this.props.program.name }
-            this.props.dispatch(actionStop)
         })
     }
 
@@ -168,6 +166,15 @@ class ProgramContainer extends React.Component {
                 wheelsList: data,
                 refreshingData: false
             })
+        }).catch((error) => {
+            Toast.show({
+                type: 'error',
+                visibilityTime: 3000,
+                autoHide: true,
+                position: 'bottom',
+                text1: 'Erreur : pas de réponse du serveur',
+                text2: error.message
+            });
         })
     }
 

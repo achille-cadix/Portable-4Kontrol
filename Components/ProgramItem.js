@@ -20,7 +20,6 @@ class ProgramItem extends React.Component {
         const actionToggle = { type: "TOGGLE_PROGRAM", value: this.props.program }
         this.props.dispatch(actionToggle)
         let url = '/program?name=' + this.props.program.replace('.py', '') + '&brightness=' + this.props.brightness + '&wheel=' + this.state.selectedWheel.replace('.py', '');
-        console.log(url)
         this.props.client.post(url).then((response) => {
             Toast.show({
                 type: 'success',

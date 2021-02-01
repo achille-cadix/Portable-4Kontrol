@@ -36,7 +36,7 @@ class PlaylistContainer extends React.Component {
     getMyStringValue = async (item) => {
         try {
             stringValue = await AsyncStorage.getItem(item)
-            return stringValue != null ? stringValue : this.props.navigation.state.params.defaultValues[item]
+            return stringValue != null ? stringValue : this.default_ip[item]
         } catch (e) {
             console.log(e)
         }
@@ -119,13 +119,11 @@ class PlaylistContainer extends React.Component {
                 autoHide: true,
                 position: 'bottom',
                 text1: 'Erreur : pas de réponse du serveur',
-                text2: 'Veuillez vérifier que vous êtes bien connecté au Wifi du 4K'
+                text2: error.message
             });
             this.setState({
                 refreshingData: false
             })
-            const actionStop = { type: "STOP_PROGRAM", value: this.props.program.name }
-            this.props.dispatch(actionStop)
         })
     }
 
